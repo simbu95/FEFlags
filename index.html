@@ -53,6 +53,14 @@ input{width: 500px}
 			out+="K "
 		}
 		
+		if(text.includes("P2")){
+			out+="Pt "
+		}else if(text.includes("P")){
+			out+="Pk "
+		}else{
+			out+="Ps "
+		}
+		
 		if(text.includes("C3")){
 			out+="C5 "
 		}else if(text.includes("C2")){

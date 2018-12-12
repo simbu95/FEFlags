@@ -23,15 +23,15 @@
 	document.getElementById('calc').addEventListener('click', calculate);
 	
 	function calculate() {
-		text=document.getElementById('Flags');
-		ret=Parse(test);
+		var text=document.getElementById('Flags').value;
+		ret=Parse(text);
 		var option = document.createElement("option");
     		option.text = ret;
 		document.getElementById('Output').add(option)
 	}
 	
 	function Parse(text){
-		out="";
+		var out="";
 		
 		if(text.includes("V2")){
 			out+="V2 "

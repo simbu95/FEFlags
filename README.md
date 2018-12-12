@@ -8,4 +8,4 @@ S! isn't turned off for anything except S2 as is the same in the implementation 
 
 E2 and E are both changed to just Er, can't change that so complain to Board
 
-There is no F flag equivalent, so both F2 and F are changed to just F
+There is no F flag equivalent, so both F2 and F are changed to just F, Complain to Board

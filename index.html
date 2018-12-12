@@ -7,15 +7,10 @@
 </head>
 <body>
 	<div class="row">
-		<div class="col-6">
+		<div class="col-8">
 			<input type="text" id="Flags"/>
 		</div>
 		<div class="col"><button id="calc">Calculate!</button></div>
-	</div>
-	<div class="row">
-		<div class="col-6">
-			<select id="Output"></select>
-		</div>
 	</div>
 </body>
 
@@ -25,9 +20,7 @@
 	function calculate() {
 		var text=document.getElementById('Flags').value;
 		ret=Parse(text);
-		var option = document.createElement("option");
-    		option.text = ret;
-		document.getElementById('Output').add(option)
+		document.getElementById('Flags').value=ret;
 	}
 	
 	function Parse(text){

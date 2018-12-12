@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<head>
+   <meta charset="utf-8" />
+   <title>FF4 Magic Damage Calc</title>
+</head>
+<body>
+	<div class="row">
+		<div class="col-6">
+			<input type="text" id="Flags"/>
+		</div>
+		<div class="col"><button id="calc">Calculate!</button></div>
+	</div>
+	<div class="row">
+		<div class="col-6">
+			<select id="Output"></select>
+		</div>
+	</div>
+</body>
+
+<script>
+	document.getElementById('calc').addEventListener('click', calculate);
+	
+	function calculate() {
+		text=document.getElementById('Flags');
+		ret=Parse(test);
+		var option = document.createElement("option");
+    option.text = ret;
+		document.getElementById('Output').add(option)
+	}
+	
+	function Parse(text){
+		out="";
+		
+		if(text.includes("V2")){
+			out+="V2 "
+		}else if(text.includes("V")){
+			out+="V1 "
+		}
+		
+		if(text.includes("J2")){
+			out+="Jisa "
+		}else if(text.includes("J")){
+			out+="Ji "
+		}
+		
+		if(text.includes("K4")){
+			out+="Kqmt! "
+		}else if(text.includes("K3")){
+			out+="Kqmt "
+		}else if(text.includes("K2")){
+			out+="Kqm "
+		}else if(text.includes("K")){
+			out+="K "
+		}
+		
+		if(text.includes("C3")){
+			out+="C5 "
+		}else if(text.includes("C2")){
+			out+="C "
+		}else if(text.includes("C")){
+			out+="Cx "
+		}
+		
+		if(text.includes("T5")){
+			out+="Txr"
+		}else if(text.includes("T4")){
+			out+="T4r"
+		}else if(text.includes("T3")){
+			out+="T3r"
+		}else if(text.includes("T2")){
+			out+="T2r"
+		}else if(text.includes("T")){
+			out+="Tr"
+		}
+		if(text.includes("$")){
+			out+="g"
+		}
+		out+=" "
+		
+		if(text.includes("S5")){
+			out+="Sc!"
+		}else if(text.includes("S4")){
+			out+="S4!"
+		}else if(text.includes("S3")){
+			out+="S3!"
+		}else if(text.includes("S2")){
+			out+="S2"
+		}else if(text.includes("S")){
+			out+="S!"
+		}
+		if(text.includes("$3")){
+			out+="f"
+		}
+		out+=" "
+		
+		if(text.includes("B2")){
+			out+="B! "
+		}else if(text.includes("B")){
+			out+="B "
+		}
+		
+		if(text.includes("F")){
+			out+="F "
+		}
+		
+		if(text.includes("N2")){
+			out+="Nckb "
+		}else if(text.includes("N")){
+			out+="Nck "
+		}
+		
+		if(text.includes("G")){
+			out+="Gl "
+		}else {
+			out+="Gdmwl "
+		}
+		
+		if(text.includes("E4")){
+			out+="Ex "
+		}else if(text.includes("E3")){
+			out+="Et "
+		}else if(text.includes("E2")){
+			out+="Er "
+		}else if(text.includes("E1")){
+			out+="Er "
+		}
+		
+		if(text.includes("X2")){
+			out+="Xskb "
+		}else if(text.includes("X")){
+			out+="Xs "
+		}
+		
+		else if(text.includes("W2")){
+			out+="-whichburn "
+		}if(text.includes("W")){
+			out+="-whyburn "
+		}
+		
+		if(text.includes("Z")){
+			out+="-z "
+		}
+		
+		return out;
+		
+	}

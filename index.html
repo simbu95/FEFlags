@@ -235,8 +235,7 @@ function random(args){
             }
         })
         args.filter(arg => arg.startsWith('-')).forEach((arg) => {
-            const [flag] = arg
-            currentFlags[flag] = true
+            ModMinus(arg)
         })
     }
 
@@ -259,5 +258,22 @@ function random(args){
     })
 
     return flags
+}
+function ModMinus(arg,currentFlags){
+	if(availableFlags["CHARACTERS"].optional.includes(arg)){
+		currentFlags["Character"].push(arg)
+	}
+	else if (availableFlags["MODIFIERS"].optional.includes(arg)){
+		currentFlags["MODIFIERS"].push(arg)
+	}
+	else if (availableFlags["FUN"].optional.includes(arg)){
+		currentFlags["FUN"].optional.push(arg)
+	}
+	else if (availableFlags["WHYBURN"].unique.includes(arg)){
+		currentFlags["WHYBURN"].unique=[arg]
+	}
+	else if (availableFlags["START"].unique.includes(arg)){
+		currentFlags["START"].unique=[arg]
+	}
 }
 	</script>

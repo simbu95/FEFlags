@@ -156,9 +156,6 @@ input{width: 500px}
 
 	
 	<script>
-		
-		const checkMessage = require('../../../utils/check-message')
-const getRandomNumber = require('../../../utils/get-random-number')
 
 // 100 - weight % chance to include the flag
 // 0 for guaranteed
@@ -189,6 +186,9 @@ const availableFlags = {
     MODIFIERS: { optional: ['', '-rescue', '-nodupes', '-hobs', '-aa', '-noadamants', '-noapples', '-nosirens'], weight: 0 },
     FUN: { optional: ['-spoon'], weight: 50 },
     REQUIRED: { optional: ['-huh', '-z', '-fab'], weight: 0 },
+}
+function getRandomNumber(start,end){
+	return Math.floor((Math.random() * (end - start))) + start
 }
 function random(args){
     const hasSetFlags = (args && args.length > 0)

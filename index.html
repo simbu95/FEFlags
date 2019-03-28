@@ -228,7 +228,7 @@ function random(args){
             const [flag] = arg
             if (availableFlags[flag]) {
                 if (currentFlags[flag]) {
-                    currentFlags[flag] = Object.assign(currentFlags[flag], [...arg].slice(1))
+                    currentFlags[flag].push(arg.slice(1))
                 } else {
                     currentFlags[flag] = [...arg].slice(1)
                 }

@@ -153,3 +153,111 @@ input{width: 500px}
 		
 	}
 </script>
+
+	
+	<script>
+		
+		const checkMessage = require('../../../utils/check-message')
+const getRandomNumber = require('../../../utils/get-random-number')
+
+// 100 - weight % chance to include the flag
+// 0 for guaranteed
+const availableFlags = {
+    V: { unique: ['1', '2'], weight: 34 },
+    J: { optional: ['i', 's', 'a'], weight: 25, required: 1 },
+    K: { optional: ['q', 'm', 't', '!'], weight: 10 },
+    C: { optional: ['n', 'x', '5'], weight: 10 },
+    P: { optional: ['s', 'k', 't'], weight: 25, required: 1 },
+    T: { unique: ['1', '2', '3', '4', 'x'], optional: ['g', 'r'], weight: 10 },
+    S: { unique: ['1', '2', '3', '4', 'x', 'c'], optional: ['!', 'f'], weight: 10 },
+    B: { optional: ['!'], weight: 50 },
+    F: { optional: ['1'], weight: 50 },
+    N: { optional: ['c', 'k', 'b'], weight: 25, required: 1 },
+    E: { unique: ['t', 'r', 'x'], optional: ['c', 'f'], weight: 10 },
+    X: { optional: ['s', 'k', 'b', 'x'], weight: 10, required: 1 },
+    G: { optional: ['d', 'm', 'w', 'l', '64'], weight: 20, required: 1 },
+    WHYBURN: { unique: ['-whyburn', '-whichburn'], weight: 33 },
+    CHARACTERS: {
+        optional: ['-nocecil', '-nokain', '-norydia', '-notellah', '-noedward', '-norosa', '-noyang', '-nopalom', '-noporom', '-nocid', '-noedge', '-nofusoya'],
+        weight: 8,
+    },
+    START: {
+        unique: ['', '-startcecil', '-startkain', '-startrydia',
+            '-starttellah', '-startedward', '-startrosa', '-startyang', '-startpalom', '-startporom', '-startcid', '-startedge', '-startfusoya'],
+        weight: 0,
+    },
+    MODIFIERS: { optional: ['', '-rescue', '-nodupes', '-hobs', '-aa', '-noadamants', '-noapples', '-nosirens'], weight: 0 },
+    FUN: { optional: ['-spoon'], weight: 50 },
+    REQUIRED: { optional: ['-huh', '-z', '-fab'], weight: 0 },
+}
+function random(args){
+    const hasSetFlags = (args && args.length > 0)
+    let flags = ''
+    const currentFlags = { REQUIRED: availableFlags.REQUIRED.optional }
+
+    Object.keys(availableFlags).forEach((flag) => {
+        const shouldUseFlag = (getRandomNumber(0, 100) > availableFlags[flag].weight)
+        if (currentFlags[flag]) { return }
+        if (!shouldUseFlag) { return }
+        currentFlags[flag] = []
+        const uniqueOptions = availableFlags[flag].unique
+        const optionalOptions = availableFlags[flag].optional
+        if (uniqueOptions) {
+            const selectedValue = uniqueOptions[getRandomNumber(0, uniqueOptions.length - 1)]
+            currentFlags[flag].push(selectedValue)
+        }
+        if (optionalOptions) {
+            const minOptions = availableFlags[flag].required || 0
+            const numOptions = getRandomNumber(0, optionalOptions.length) + minOptions
+            if (numOptions === optionalOptions.length) {
+                optionalOptions.forEach(option => currentFlags[flag].push(option))
+            } else {
+                for (let i = 0; i < numOptions;) {
+                    const randomOption = optionalOptions[getRandomNumber(0, optionalOptions.length - 1)]
+                    if (currentFlags[flag].indexOf(randomOption) < 0) {
+                        currentFlags[flag].push(randomOption)
+                        i += 1
+                    }
+                }
+            }
+        }
+    })
+
+    if (hasSetFlags) {
+        args.filter(arg => !arg.startsWith('-')).forEach((arg) => {
+            const [flag] = arg
+            if (availableFlags[flag]) {
+                if (currentFlags[flag]) {
+                    currentFlags[flag] = Object.assign(currentFlags[flag], [...arg].slice(1))
+                } else {
+                    currentFlags[flag] = [...arg].slice(1)
+                }
+            }
+        })
+        args.filter(arg => arg.startsWith('-')).forEach((arg) => {
+            const [flag] = arg
+            currentFlags[flag] = true
+        })
+    }
+
+    Object.keys(currentFlags).forEach((flag) => {
+        const flagValue = currentFlags[flag]
+        if (flag.length === 1) {
+            flags += ` ${flag}`
+            if (flagValue && flagValue.length > 0) {
+                flags += `${currentFlags[flag].join('')}`
+            }
+            return
+        }
+        if (flagValue === '' || flagValue === ' ' || flagValue.length === 0) { return }
+        if (flagValue === true) {
+            flags += ` ${flag}`
+        } else if (flagValue) {
+            const deduped = new Set(flagValue)
+            flags += ` ${Array.from(deduped).join(' ')}`
+        }
+    })
+
+    return flags
+}
+	</script>

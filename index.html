@@ -267,13 +267,13 @@ function ModMinus(arg,currentFlags){
 		currentFlags["MODIFIERS"].push(arg)
 	}
 	else if (availableFlags["FUN"].optional.includes(arg)){
-		currentFlags["FUN"].optional.push(arg)
+		currentFlags["FUN"].push(arg)
 	}
 	else if (availableFlags["WHYBURN"].unique.includes(arg)){
-		currentFlags["WHYBURN"].unique=[arg]
+		currentFlags["WHYBURN"]=[arg]
 	}
 	else if (availableFlags["START"].unique.includes(arg)){
-		currentFlags["START"].unique=[arg]
+		currentFlags["START"]=[arg]
 	}
 }
 	</script>
